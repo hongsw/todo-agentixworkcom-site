@@ -1,17 +1,22 @@
-# 🤖 Claude Code Agency Starter Kit
+# 🌐 agentiXwork.com 사이트 개발 프로젝트
 
-**AI 에이전시 이중 기록 체계** — Claude Code가 작업하고, 고객은 Notion에서 확인합니다.
+**Claude Code Agency** 기반 AI 에이전시 이중 기록 체계로 운영되는 프로젝트입니다.
 
-> Baryon Labs의 AI 에이전시 운영 모델을 위한 Claude Code 스타터 파일입니다.
+> Claude Code가 작업하고, 고객은 Notion에서 확인합니다.
 
 ---
 
-## 📌 이게 뭔가요?
+## 📌 프로젝트 정보
 
-기존에 Claude Code는 PR 기반으로 작업을 완료합니다.
-하지만 **비개발자 고객은 PR을 읽지 못합니다.**
+- **사이트**: [agentixwork.com](https://agentixwork.com)
+- **GitHub**: https://github.com/hongsw/todo-agentixworkcom-site
+- **기반 템플릿**: [claude-code-agency-starter](https://github.com/hongsw/claude-code-agency-starter)
 
-이 스타터 킷은 Claude Code가 작업할 때 **동시에 Notion에도 고객용 기록을 남기도록** 설계되었습니다.
+---
+
+## 🔄 이중 기록 체계란?
+
+Claude Code가 작업할 때 **동시에 Notion에도 고객용 기록을 남깁니다**.
 
 ```
 고객 요청 (Notion 코멘트)
