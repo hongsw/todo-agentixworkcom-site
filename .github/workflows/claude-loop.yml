@@ -1,69 +1,30 @@
-# ============================================
-# Claude Code 자율 Loop — GitHub Actions
-# ============================================
-# 사용법:
-#   - 수동 트리거: Actions 탭 → "Run workflow"
-#   - 자동 실행: 평일 오전 9시 (KST)
-#   - PR merge 시 자동 실행
-#
-# 필요한 GitHub Secrets:
-#   - ANTHROPIC_API_KEY
-#   - NOTION_API_KEY
-#   - NOTION_TODO_DB_ID
-#   - NOTION_PROJECT_PAGE_ID
-
 name: Claude Code Loop
 
 on:
-  # 수동 트리거
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'TODO 목록만 확인 (실행하지 않음)'
-        required: false
-        default: 'false'
+        description: 'TODO 확인만 (실행 안 함)'
         type: boolean
-
-  # 스케줄: 평일 오전 9시 KST (UTC 0시)
+        default: false
   schedule:
-    - cron: '0 0 * * 1-5'
-
-  # PR merge 시 자동 실행 (새 TODO가 생겼을 수 있으므로)
-  pull_request:
-    types: [closed]
-    branches: [develop, main]
+    - cron: '0 0 * * 1-5'  # 평일 09:00 KST
 
 jobs:
-  claude-loop:
-    # PR merge 트리거일 때는 실제로 merge된 경우만 실행
-    if: >
-      github.event_name != 'pull_request' ||
-      github.event.pull_request.merged == true
+  loop:
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged
     runs-on: ubuntu-latest
-    timeout-minutes: 60  # 최대 1시간
-
+    timeout-minutes: 60
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: develop
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
-
-      - name: Configure Git
-        run: |
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0, ref: develop }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm install -g @anthropic-ai/claude-code
+      - run: |
           git config user.name "Claude Code Bot"
-          git config user.email "claude-bot@baryonlabs.com"
-
-      - name: Create .env
-        run: |
+          git config user.email "bot@baryonlabs.com"
+      - run: |
           cat > .env << EOF
           NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
           NOTION_TODO_DB_ID=${{ secrets.NOTION_TODO_DB_ID }}
@@ -71,18 +32,13 @@ jobs:
           GITHUB_REPO=${{ github.repository }}
           GITHUB_DEFAULT_BRANCH=develop
           EOF
-
-      - name: Run Claude Code Loop
+      - run: |
+          chmod +x scripts/run-loop.sh
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ./scripts/run-loop.sh --dry-run
+          else
+            ./scripts/run-loop.sh
+          fi
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-        run: |
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            echo "🔍 DRY RUN 모드"
-            chmod +x scripts/run-loop.sh
-            ./scripts/run-loop.sh --dry-run
-          else
-            echo "🚀 Loop 실행"
-            chmod +x scripts/run-loop.sh
-            ./scripts/run-loop.sh
-          fi
