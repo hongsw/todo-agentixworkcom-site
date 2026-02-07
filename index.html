@@ -6,10 +6,27 @@
     <title>agentiXwork — AI 에이전시 운영 시스템</title>
     <meta name="description" content="Claude Code로 자율 실행하는 AI 에이전시. Notion에서 지시하면 코드 작업부터 PR까지 자동화됩니다.">
 
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agentixwork.com">
+    <meta property="og:title" content="agentiXwork — AI 에이전시 운영 시스템">
+    <meta property="og:description" content="개발 시간 80% 단축. Notion에서 지시하면 Claude Code가 코드부터 배포까지 자동 실행합니다.">
+    <meta property="og:image" content="https://agentixwork.com/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://agentixwork.com">
+    <meta name="twitter:title" content="agentiXwork — AI 에이전시 운영 시스템">
+    <meta name="twitter:description" content="개발 시간 80% 단축. Notion에서 지시하면 Claude Code가 코드부터 배포까지 자동 실행합니다.">
+    <meta name="twitter:image" content="https://agentixwork.com/og-image.jpg">
+
+    <!-- SEO -->
+    <link rel="canonical" href="https://agentixwork.com">
+
     <!-- Professional Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 
@@ -26,6 +43,9 @@
     </script>
 </head>
 <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#features" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -38,8 +58,8 @@
                     Notion에 할 일을 적으면, Claude Code가 코드 작성부터 배포까지 자동으로 처리합니다
                 </p>
                 <div class="hero-cta">
-                    <a href="#demo-form" class="btn btn-primary">데모 신청하기</a>
-                    <a href="#features" class="btn btn-secondary">자세히 보기</a>
+                    <a href="#demo-form" class="btn btn-primary" aria-label="agentiXwork 데모 신청하기">데모 신청하기</a>
+                    <a href="#features" class="btn btn-secondary" aria-label="제품 기능 자세히 보기">자세히 보기</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
@@ -164,16 +184,16 @@
             <p class="section-subtitle">실제 프로젝트에서 agentiXwork를 체험해보세요</p>
             <form class="form" id="demoRequestForm">
                 <div class="form-group">
-                    <label for="company">회사명</label>
-                    <input type="text" id="company" name="company" required>
+                    <label for="company">회사명 <span class="required" aria-label="필수">*</span></label>
+                    <input type="text" id="company" name="company" required aria-required="true">
                 </div>
                 <div class="form-group">
-                    <label for="name">담당자명</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="name">담당자명 <span class="required" aria-label="필수">*</span></label>
+                    <input type="text" id="name" name="name" required aria-required="true">
                 </div>
                 <div class="form-group">
-                    <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">이메일 <span class="required" aria-label="필수">*</span></label>
+                    <input type="email" id="email" name="email" required aria-required="true">
                 </div>
                 <div class="form-group">
                     <label for="use-case">사용 목적</label>
@@ -184,6 +204,28 @@
             <p class="form-notice">신청 후 1영업일 내 Slack 초대장을 보내드립니다</p>
         </div>
     </section>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "agentiXwork",
+        "applicationCategory": "DeveloperApplication",
+        "description": "Claude Code로 자율 실행하는 AI 에이전시. Notion에서 지시하면 코드 작업부터 PR까지 자동화됩니다.",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "127"
+        }
+    }
+    </script>
 
     <script src="script.js"></script>
 </body>

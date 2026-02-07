@@ -2,6 +2,11 @@
 document.getElementById('demoRequestForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // Track form submission start
+    trackEvent('form_submit', {
+        form_name: 'demo_request'
+    });
+
     const form = e.target;
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
@@ -18,6 +23,7 @@ document.getElementById('demoRequestForm')?.addEventListener('submit', async (e)
     // Update button state
     submitBtn.textContent = '전송중...';
     submitBtn.disabled = true;
+    submitBtn.setAttribute('aria-busy', 'true');
 
     try {
         // Submit to API
@@ -58,6 +64,7 @@ document.getElementById('demoRequestForm')?.addEventListener('submit', async (e)
     } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-busy');
     }
 });
 
@@ -84,24 +91,32 @@ function trackEvent(eventName, eventParams = {}) {
     }
 }
 
-// Track page scroll depth
+// Track page scroll depth (with throttling for performance)
 let maxScroll = 0;
 const scrollMilestones = [25, 50, 75, 90];
+let scrollTimeout;
+
 window.addEventListener('scroll', () => {
-    const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    if (scrollTimeout) return;
 
-    if (scrollPercent > maxScroll) {
-        maxScroll = scrollPercent;
+    scrollTimeout = setTimeout(() => {
+        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
 
-        scrollMilestones.forEach(milestone => {
-            if (scrollPercent >= milestone && maxScroll < milestone + 5) {
-                trackEvent('scroll_depth', {
-                    percent: milestone
-                });
-            }
-        });
-    }
-});
+        if (scrollPercent > maxScroll) {
+            maxScroll = scrollPercent;
+
+            scrollMilestones.forEach(milestone => {
+                if (scrollPercent >= milestone && maxScroll < milestone + 5) {
+                    trackEvent('scroll_depth', {
+                        percent: milestone
+                    });
+                }
+            });
+        }
+
+        scrollTimeout = null;
+    }, 200);
+}, { passive: true });
 
 // Track outbound links
 document.addEventListener('click', (e) => {
@@ -114,12 +129,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Track form submission
-document.getElementById('demoRequestForm')?.addEventListener('submit', () => {
-    trackEvent('form_submit', {
-        form_name: 'demo_request'
-    });
-});
+// Form submit tracking is handled in the main handler above (lines 2-62)
 
 // Track CTA button clicks
 document.querySelectorAll('.btn-primary').forEach(btn => {
