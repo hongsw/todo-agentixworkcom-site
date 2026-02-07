@@ -75,14 +75,44 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// GA4 Event Tracking (placeholder)
+// GA4 Event Tracking
 function trackEvent(eventName, eventParams = {}) {
     if (typeof gtag === 'function') {
         gtag('event', eventName, eventParams);
     } else {
-        console.log('GA4 Event:', eventName, eventParams);
+        console.log('[GA4] Event:', eventName, eventParams);
     }
 }
+
+// Track page scroll depth
+let maxScroll = 0;
+const scrollMilestones = [25, 50, 75, 90];
+window.addEventListener('scroll', () => {
+    const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+    if (scrollPercent > maxScroll) {
+        maxScroll = scrollPercent;
+
+        scrollMilestones.forEach(milestone => {
+            if (scrollPercent >= milestone && maxScroll < milestone + 5) {
+                trackEvent('scroll_depth', {
+                    percent: milestone
+                });
+            }
+        });
+    }
+});
+
+// Track outbound links
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (link && link.hostname !== window.location.hostname) {
+        trackEvent('click_outbound', {
+            url: link.href,
+            text: link.textContent.trim()
+        });
+    }
+});
 
 // Track form submission
 document.getElementById('demoRequestForm')?.addEventListener('submit', () => {
