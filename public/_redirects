@@ -1,0 +1,10 @@
+# Cloudflare Pages Redirects Configuration
+
+# Redirect www to non-www
+https://www.agentixwork.com/* https://agentixwork.com/:splat 301!
+
+# SPA fallback (if needed in future)
+# /* /index.html 200
+
+# Legacy redirects (example)
+# /old-page /new-page 301

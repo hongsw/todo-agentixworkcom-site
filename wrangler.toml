@@ -1,0 +1,20 @@
+# Cloudflare Pages Configuration
+name = "agentixwork-site"
+compatibility_date = "2026-02-07"
+
+# Pages build configuration
+[build]
+  command = "echo 'Static site - no build needed'"
+  publish = "public"
+
+# Custom domains (configure in Cloudflare dashboard)
+# agentixwork.com
+# www.agentixwork.com (redirects to agentixwork.com)
+
+# Environment variables (set in Cloudflare dashboard)
+# NOTION_API_KEY
+# NOTION_LEADS_DB_ID
+# SLACK_WEBHOOK_URL
+# SLACK_BOT_TOKEN
+# SLACK_TEAM_ID
+# ADMIN_API_KEY
