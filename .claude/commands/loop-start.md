@@ -1,42 +1,33 @@
-# /loop-start — TODO 자동 처리 루프 시작
+# /loop-start
 
-Notion TODO DB에서 작업을 가져와서 자동으로 처리하는 루프를 시작합니다.
+CLAUDE.md의 LOOP 프로토콜을 **지금 즉시 시작**하라.
 
-## 실행 순서
+## 지금 할 것
 
-1. **Notion TODO DB 조회**: `NOTION_TODO_DB_ID` DB에서 Status가 "📋 대기"인 항목을 Priority 순으로 조회합니다.
+### 초기화
+1. `.env`에서 `NOTION_TODO_DB_ID`를 읽어라
+2. Notion MCP로 해당 DB에 접근하라
+3. `git fetch origin && git checkout develop && git pull origin develop`
+4. Status="📋 대기" AND 담당="Claude Code"인 TODO를 Priority 순으로 조회하라
+5. "📋 처리 예정 N건" 출력
 
-2. **각 TODO에 대해 다음을 반복**:
+TODO가 0건이면 "✅ 대기 작업 없음" 출력 후 종료.
 
-   a. **Status 업데이트**: 해당 TODO의 Status를 "🔄 진행중"으로 변경하고, 시작일을 오늘로 설정합니다.
+### 반복 실행
+조회된 TODO를 **1건씩 순서대로** 아래를 실행하라:
 
-   b. **Git 브랜치 생성**: `feature/{phase}-{task-slug}` 형태로 새 브랜치를 만듭니다.
+1. **Notion 상태 변경**: Status → "🔄 진행중", 시작일 → 오늘
+2. **브랜치 생성**: `git checkout -b feature/{phase}-{task-slug}` (develop에서 분기)
+3. **코드 작업**: Task명을 보고 실제 코드를 구현하라
+4. **커밋 & 푸시**: `git add . && git commit && git push`
+5. **PR 생성**: `gh pr create --base develop` (기술 설명 포함)
+6. **Notion 업데이트**:
+   - Status → "👀 리뷰중"
+   - PR 링크 → 방금 만든 PR URL
+   - 작업 요약 → **고객이 읽을 수 있는 쉬운 한국어** (기술 용어 금지!)
+   - 완료일 → 오늘
 
-   c. **코드 작업 수행**: TODO의 Task명과 작업 요약을 참고하여 실제 코드 작업을 수행합니다.
+**그리고 나서 멈추지 말고 다음 "📋 대기" TODO를 가져와서 같은 과정을 반복하라.**
+**대기 TODO가 없을 때까지 계속하라.**
 
-   d. **커밋 & PR 생성**: 변경사항을 커밋하고 GitHub PR을 생성합니다.
-      - PR 제목: `[{Phase}] {Task명}`
-      - PR 본문: 기술적 변경사항 상세 기록
-
-   e. **Notion 업데이트** (핵심!):
-      - Status → "👀 리뷰중"
-      - PR 링크 → 생성된 PR URL
-      - 작업 요약 → **비개발자가 이해할 수 있는 한국어 설명**으로 업데이트
-      - 완료일 → 오늘 날짜
-
-   f. **다음 TODO로 이동**
-
-3. **모든 TODO 처리 완료 시**: 처리 결과 요약을 Notion 프로젝트 페이지 커뮤니케이션 로그에 기록합니다.
-
-## 작업 요약 작성 규칙
-
-반드시 CLAUDE.md의 "작업 요약 작성 가이드"를 따릅니다:
-- 기술 용어 금지
-- 3문장 이내
-- "무엇을 했는지 / 결과가 어떻게 달라졌는지 / 고객에게 요청할 것" 구조
-
-## 주의사항
-
-- 담당이 "팀원" 또는 "고객"인 TODO는 건드리지 않습니다 (Claude Code 담당만 처리)
-- Status가 "⏸️ 보류"인 항목은 건너뜁니다
-- 작업 중 에러가 발생하면 해당 TODO에 에러 내용을 기록하고 다음으로 넘어갑니다
+에러가 나면: 해당 TODO를 "⏸️ 보류"로 바꾸고, 작업 요약에 "기술적 문제로 보류합니다"라고 쓰고, 다음 TODO로 넘어가라.
