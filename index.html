@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0066cc">
+    <title>agentiXwork — AI 에이전시 운영 시스템</title>
+    <meta name="description" content="Claude Code로 자율 실행하는 AI 에이전시. Notion에서 지시하면 코드 작업부터 PR까지 자동화됩니다.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agentixwork.com">
+    <meta property="og:title" content="agentiXwork — AI 에이전시 운영 시스템">
+    <meta property="og:description" content="개발 시간 80% 단축. Notion에서 지시하면 Claude Code가 코드부터 배포까지 자동 실행합니다.">
+    <meta property="og:image" content="https://agentixwork.com/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://agentixwork.com">
+    <meta name="twitter:title" content="agentiXwork — AI 에이전시 운영 시스템">
+    <meta name="twitter:description" content="개발 시간 80% 단축. Notion에서 지시하면 Claude Code가 코드부터 배포까지 자동 실행합니다.">
+    <meta name="twitter:image" content="https://agentixwork.com/og-image.jpg">
+
+    <!-- SEO -->
+    <link rel="canonical" href="https://agentixwork.com">
+
+    <!-- Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            send_page_view: true,
+            cookie_flags: 'SameSite=None;Secure'
+        });
+    </script>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#features" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    당신은 결정만 하세요<br>
+                    <span class="gradient-text">실행은 AI가 알아서</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Notion에 할 일을 적으면, Claude Code가 코드 작성부터 배포까지 자동으로 처리합니다
+                </p>
+                <div class="hero-cta">
+                    <a href="#demo-form" class="btn btn-primary" aria-label="agentiXwork 데모 신청하기">데모 신청하기</a>
+                    <a href="#features" class="btn btn-secondary" aria-label="제품 기능 자세히 보기">자세히 보기</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">80%</div>
+                        <div class="stat-label">개발 시간 단축</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">자율 작업</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">코드 추적 가능</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-card">
+                    <div class="card-header">Notion TODO</div>
+                    <div class="card-body">
+                        <div class="todo-item">
+                            <span class="status">🔄 진행중</span>
+                            <span class="task">히어로 섹션 구현</span>
+                        </div>
+                        <div class="todo-item">
+                            <span class="status">✅ 완료</span>
+                            <span class="task">API 엔드포인트 추가</span>
+                        </div>
+                        <div class="todo-item">
+                            <span class="status">📋 대기</span>
+                            <span class="task">반응형 디자인</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="visual-arrow">→</div>
+                <div class="visual-card">
+                    <div class="card-header">GitHub PR</div>
+                    <div class="card-body">
+                        <div class="pr-item">
+                            <div class="pr-title">feat: Add hero section UI</div>
+                            <div class="pr-meta">
+                                <span class="pr-status">✓ Merged</span>
+                                <span class="pr-author">Claude Code</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">어떻게 작동하나요?</h2>
+            <p class="section-subtitle">개발팀 없이도 프로젝트를 진행할 수 있습니다</p>
+
+            <div class="features-grid">
+                <!-- Feature 1: Parallel MCP Server -->
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">여러 AI가 동시 작업</h3>
+                    <p class="feature-description">
+                        한 명이 차례로 하던 일을, 여러 AI가 나눠서 동시에 처리합니다. 그래서 빠릅니다.
+                    </p>
+                    <ul class="feature-list">
+                        <li>작업을 자동으로 나눠서 처리</li>
+                        <li>서로 충돌하지 않게 조율</li>
+                        <li>진행 상황을 실시간 확인</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 2: VS Code Extension -->
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3 class="feature-title">개발 도구 연동</h3>
+                    <p class="feature-description">
+                        Notion에서 지시하면, VS Code에서 실시간으로 코드가 작성되는 걸 볼 수 있습니다.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Notion과 개발 도구가 자동 연결</li>
+                        <li>변경되는 코드를 바로 확인</li>
+                        <li>AI가 무엇을 했는지 기록</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 3: miri.dev Platform -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">중앙 관리 대시보드</h3>
+                    <p class="feature-description">
+                        여러 프로젝트를 한 화면에서 관리합니다. 누가 뭘 하고 있는지 한눈에 보입니다.
+                    </p>
+                    <ul class="feature-list">
+                        <li>프로젝트별 진행 현황</li>
+                        <li>AI 작업 속도와 품질 체크</li>
+                        <li>팀원 작업 분배 현황</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 4: Autonomous Loop -->
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">완전 자동 실행</h3>
+                    <p class="feature-description">
+                        Notion에 할 일을 적어두면, AI가 알아서 작업하고 검토 요청까지 자동으로 올립니다.
+                    </p>
+                    <ul class="feature-list">
+                        <li>새 할 일이 생기면 자동 시작</li>
+                        <li>코드 작성, 테스트, 배포 준비</li>
+                        <li>비개발자도 이해할 수 있는 요약 제공</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Form -->
+    <section id="demo-form" class="demo-form">
+        <div class="container">
+            <h2>데모 체험 신청</h2>
+            <p class="section-subtitle">실제 프로젝트에서 agentiXwork를 체험해보세요</p>
+            <form class="form" id="demoRequestForm">
+                <div class="form-group">
+                    <label for="company">회사명 <span class="required" aria-label="필수">*</span></label>
+                    <input type="text" id="company" name="company" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="name">담당자명 <span class="required" aria-label="필수">*</span></label>
+                    <input type="text" id="name" name="name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일 <span class="required" aria-label="필수">*</span></label>
+                    <input type="email" id="email" name="email" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="use-case">사용 목적</label>
+                    <textarea id="use-case" name="use-case" rows="3" placeholder="예: 사내 프로젝트 자동화, 고객사 랜딩 페이지 제작"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">신청하기</button>
+            </form>
+            <p class="form-notice">신청 후 1영업일 내 Slack 초대장을 보내드립니다</p>
+        </div>
+    </section>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "agentiXwork",
+        "applicationCategory": "DeveloperApplication",
+        "description": "Claude Code로 자율 실행하는 AI 에이전시. Notion에서 지시하면 코드 작업부터 PR까지 자동화됩니다.",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "127"
+        }
+    }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
