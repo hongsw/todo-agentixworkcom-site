@@ -20,12 +20,20 @@ document.getElementById('demoRequestForm')?.addEventListener('submit', async (e)
     submitBtn.disabled = true;
 
     try {
-        // TODO: Replace with actual API endpoint
-        // For now, log to console and show success message
-        console.log('Demo request submitted:', formData);
+        // Submit to API
+        const response = await fetch('/api/submit-demo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.error || 'Submission failed');
+        }
 
         // Show success message
         alert('데모 신청이 완료되었습니다!\n1영업일 내 Slack 초대장을 보내드리겠습니다.');
@@ -33,9 +41,20 @@ document.getElementById('demoRequestForm')?.addEventListener('submit', async (e)
         // Reset form
         form.reset();
 
+        // Track conversion
+        trackEvent('demo_request_success', {
+            company: formData.company,
+            has_use_case: !!formData.useCase
+        });
+
     } catch (error) {
         console.error('Submission error:', error);
         alert('전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+
+        // Track error
+        trackEvent('demo_request_error', {
+            error_message: error.message
+        });
     } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
